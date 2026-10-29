@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080d18">
+  <title>ABUZOK</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main id="app">
+  <div class="ambient"></div><div class="ambient two"></div>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <button class="brandmark" id="openManager" type="button" aria-label="Управление сигналами">
+          <img class="brand-photo" src="images/logo.png" alt="" onload="this.parentElement.classList.add('has-photo')" onerror="this.remove()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 12 4l8 14H4Z"/><path d="M8 14h8M10 10h4"/></svg>
+        </button>
+        ABUZOK
+      </div>
+      <div class="online"><span class="dot"></span><span>ОНЛАЙН</span><strong id="onlineCount">78</strong></div>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow"><span class="dot"></span> SIGNAL SYSTEM · LIVE</div>
+      <h1>Твой следующий<br><span>сигнал</span></h1>
+      <p class="subtitle">Система готова к синхронизации. Запусти генерацию и получи персональный игровой сигнал.</p>
+    </section>
+
+    <section class="signal-card" aria-label="Генерация сигнала">
+      <div class="card-label"><span>ЦЕНТР СИГНАЛА</span><span class="ready"><span class="dot"></span> СИСТЕМА ГОТОВА</span></div>
+      <div class="orb-wrap">
+        <div class="orb">
+          <div class="orb-core">
+            <img class="center-photo" src="images/center.png" alt="" onload="this.parentElement.classList.add('has-photo')" onerror="this.remove()">
+            <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8h24v8H12zM8 16h8v8H8zM32 16h8v8h-8zM12 24h24v8H12zM18 32h12v8H18z"/><path d="M20 12h8M20 28h8" stroke-opacity=".7"/></svg>
+          </div>
+        </div>
+        <div class="orb-caption">READY TO CONNECT</div>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-label">Статус подключения</div><div class="metric-value"><span class="metric-icon">⌁</span>Ожидание сигнала</div></div>
+        <div class="metric"><div class="metric-label">Профиль сигнала</div><div class="metric-value"><span class="metric-icon">✧</span><span id="profileCount">7 модулей</span></div></div>
+      </div>
+      <button class="primary-btn" id="generateBtn">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-3 8H4l7 12 3-9h6L13 2Z"/></svg>
+        <span>Сгенерировать сигнал</span>
+        <svg class="btn-arrow" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+      </button>
+      <div class="card-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Локальная сессия защищена</div>
+    </section>
+
+    <footer class="footer">
+      <button class="settings-btn" id="openSettings" aria-label="Открыть настройки"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8 8 0 0 1-1.6.9l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.6-.9l-1.7.7-1.4-2.4 1.4-1.1a7 7 0 0 1 0-1.9l-1.4-1.2 1.4-2.4 1.7.7a8 8 0 0 1 1.6-.9l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.6.9l1.7-.7 1.4 2.4-1.4 1.2a7 7 0 0 1 0 1.8Z" transform="translate(-1 -1) scale(1.08)"/></svg></button>
+      <div class="footer-note"><span>✦</span> Настрой сигнал под себя</div>
+      <div>ABUZOK <span class="slash">/</span> v1.0</div>
+    </footer>
+  </div>
+</main>
+
+<div class="overlay" id="signalManagerOverlay" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+  <section class="panel">
+    <div class="panel-head">
+      <div><h2 class="panel-title" id="settingsTitle">Управление сигналами</h2></div>
+      <button class="close-btn" data-close="signalManagerOverlay" aria-label="Закрыть меню"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m18 6-12 12M6 6l12 12"/></svg></button>
+    </div>
+    <div class="manager-list" id="signalList"></div>
+    <button class="primary-btn settings-save" id="newSignalBtn" type="button">＋ Добавить сигнал</button>
+    <div class="editor-box" id="signalEditor" hidden>
+      <h3 class="panel-title editor-title" id="editorTitle">Новый сигнал</h3>
+      <label class="field-label" for="signalName">Название сигнала</label>
+      <input class="text-field" id="signalName" maxlength="40" value="Мой сигнал" placeholder="Например, Ресурсы №1">
+      <label class="field-label" for="signalPriority">Приоритет генерации</label>
+      <select class="select-field" id="signalPriority"><option value="1">1 — первым</option><option value="2">2 — вторым</option><option value="3">3 — третьим</option><option value="4">4 — четвёртым</option><option value="5">5 — пятым</option><option value="6">6 — шестым</option><option value="7">7 — седьмым</option><option value="8">8 — восьмым</option><option value="9">9 — девятым</option><option value="10">10 — десятым</option></select>
+      <label class="field-label" for="pickaxeSelect">Тип кирки</label>
+      <select class="select-field" id="pickaxeSelect">
+        <option value="wood">Деревянная</option><option value="stone">Каменная</option><option value="iron">Железная</option><option value="diamond">Алмазная</option><option value="random">Случайная</option><option value="none">Без кирки</option>
+      </select>
+      <div class="section-title">Точное количество блоков</div>
+      <div id="quantityFields"></div>
+      <div class="editor-actions"><button class="secondary-btn" id="cancelEditBtn" type="button">Отмена</button><button class="primary-btn" id="saveSignalBtn" type="button">Сохранить сигнал</button></div>
+      <p class="muted-note">Количество задаётся отдельно для каждого сигнала. Настройки сохраняются в этом браузере.</p>
+    </div>
+  </section>
+</div>
+<div class="overlay" id="generalSettingsOverlay" role="dialog" aria-modal="true" aria-labelledby="generalSettingsTitle">
+  <section class="panel">
+    <div class="panel-head"><div><h2 class="panel-title" id="generalSettingsTitle">Настройки</h2><p class="panel-desc">Общие параметры интерфейса. Управление сигналами открывается по значку ABUZOK вверху.</p></div><button class="close-btn" data-close="generalSettingsOverlay" aria-label="Закрыть настройки"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m18 6-12 12M6 6l12 12"/></svg></button></div>
+    <button class="primary-btn settings-save" id="saveGeneralSettings" type="button">Сохранить настройки</button>
+  </section>
+</div>
+<div class="overlay" id="progressOverlay" role="dialog" aria-modal="true" aria-labelledby="progressTitle">
+  <section class="panel progress-panel">
+    <div class="panel-head"><div><div class="eyebrow"><span class="dot"></span> SECURE SESSION</div></div><button class="close-btn" data-close="progressOverlay" aria-label="Закрыть окно"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m18 6-12 12M6 6l12 12"/></svg></button></div>
+    <div id="loadingView">
+      <div class="progress-orb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-3 8H4l7 12 3-9h6L13 2Z"/></svg></div>
+      <h2 class="progress-title" id="progressTitle">Подключение к системе</h2>
+      <p class="progress-sub" id="progressSub">Устанавливаем защищённый канал и подготавливаем генератор…</p>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-meta"><span id="progressStatus">Инициализация</span><span id="progressPercent">0%</span></div>
+      <ul class="log-list" id="logList"><li class="active"><span class="log-dot">•</span> Инициализация сессии</li><li><span class="log-dot">2</span> Подключение к узлу</li><li><span class="log-dot">3</span> Анализ параметров</li><li><span class="log-dot">4</span> Формирование сигнала</li></ul>
+    </div>
+    <div id="resultView" class="result-view" hidden></div>
+  </section>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
